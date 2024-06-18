@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Send Email with Attachment</title>
+</head>
+<body>
+    <h1>Send Email with Attachment</h1>
+    <form action="send_email.php" method="post" enctype="multipart/form-data">
+        <label for="to">To:</label>
+        <input type="email" name="to" required><br><br>
+        <label for="subject">Subject:</label>
+        <input type="text" name="subject" required><br><br>
+        <label for="message">Message:</label>
+        <textarea name="message" required></textarea><br><br>
+        <label for="attachment">Attachment:</label>
+        <input type="file" name="attachment" accept=".pdf,.docx,.doc,.txt"><br><br>
+        <input type="submit" value="Send Email">
+        <label for="signature">Signature:</label>
+<textarea name="signature" rows="10"></textarea><br><br>
+    </form>
+</body>
+</html>

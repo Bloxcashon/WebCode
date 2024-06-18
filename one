@@ -1,0 +1,32 @@
+require('dotenv').config();
+
+const noblox = require('noblox.js');
+
+async function startApp() {
+  if (!process.env.ROBLOSECURITY) {
+    console.error('ROBLOSECURITY environment variable is not set');
+    return;
+  }
+
+  const cookie = process.env.ROBLOSECURITY;
+  try {
+    const currentUser = await noblox.setCookie(cookie);
+    console.log(`Logged in as ${currentUser.UserName} [${currentUser.UserID}]`);
+
+    // Buy gamepasses
+    try {
+      const result = await noblox.buy(1841033197); // Replace with the gamepass ID you want to buy
+      console.log(`Bought gamepass successfully!`);
+    } catch (error) {
+      if (error.message.includes('Insufficient funds')) {
+        console.log('Insufficient funds!');
+      } else {
+        console.log('Error buying gamepass:', error);
+      }
+    }
+  } catch (error) {
+    console.error('Error setting cookie:', error);
+  }
+}
+
+startApp();
