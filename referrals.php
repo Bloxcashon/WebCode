@@ -45,7 +45,7 @@ $total_referral_earnings = mysqli_fetch_row(mysqli_query($conn, "SELECT SUM(refb
         <li><a href="#">Promocodes</a></li>
         <li><a href="#">Withdraw</a></li>
         <li><a href="#">Giveways</a></li>
-        <li><a href="#">Airdrop</a></li>
+        <li><a href="#">Rewards</a></li>
         <li><a href="#">Referrals</a></li>
         <li><a href="#">Tasks</a></li>
     </ul>
@@ -74,6 +74,9 @@ $total_referral_earnings = mysqli_fetch_row(mysqli_query($conn, "SELECT SUM(refb
 
         
     <div class="emethods-box">
+    <div class="activities-container">
+    <div id="activities-list"></div>
+</div>
             <div class="referral-container">
             <h2>Referrals</h2>
   <p>Invite new users to our website with your referral link and receive 10% of all their earnings!</p>
@@ -91,16 +94,42 @@ $total_referral_earnings = mysqli_fetch_row(mysqli_query($conn, "SELECT SUM(refb
       <span><?php echo $num_users_referred;?></span></br>
     </div>
     <div class="earnings">
-      <span>Total Earned From Referrals</span><br>
+      <span>Total earned From Referrals</span><br>
       <span>R$ <?php echo number_format($total_referral_earnings, 2);?></span></br>
     </div>
   </div>
+</div>
 </div>
 <div id="alert-box" class="alert-box">
         <span class="alert-message">Referral link copied to clipboard!</span>
         <span class="close-btn">&times;</span>
     </div>
+
 </section>
+<footer>
+  <div class="footer-container">
+    <div class="footer-left-wrapper">
+    <div class="footer-left">
+      <img src="images/logo.png" alt="Logo" class="logo">
+      <p style="text-align: center;">&copy; 2024 Bloxcashon</p>
+      <p style="text-align: center;">All rights reserved</p>
+    </div>
+</div>
+    <div class="footer-right">
+      <div class="footer-links">
+        <a href="tos.html">Terms & Conditions</a>
+        <i class="ri-git-commit-fill"></i>
+        <a href="privacy.html">Privacy Policy</a>
+        <i class="ri-git-commit-fill"></i>
+        <a href="return.html">Return Policy</a>
+        <i class="ri-git-commit-fill"></i>
+        <a href="eula">EULA</a>
+      </div>
+      <p>Made with <i class="bx bx-heart" style="color: #fff;"></i> by Bloxcashon</p>
+      <p>We are not affiliated with Roblox or any of their trademarks</p>
+    </div>
+  </div>
+</footer>
 <script>
         function copyToClipboard(elementId) {
             var element = document.getElementById(elementId);
@@ -127,6 +156,31 @@ $total_referral_earnings = mysqli_fetch_row(mysqli_query($conn, "SELECT SUM(refb
             alertBox.style.display = "none";
         }
     </script>
+<script>
+function fetchActivities() {
+    fetch('fetch_activities.php')
+        .then(response => response.json())
+        .then(data => {
+            const activitiesList = document.getElementById('activities-list');
+            activitiesList.innerHTML = '';
+            data.forEach(activity => {
+                const activityElement = document.createElement('div');
+                activityElement.className = 'activity-item';
+                activityElement.innerHTML = `
+                    <img src="${activity.avatar}" alt="${activity.username}" class="activity-avatar">
+                    <div class="activity-details">
+                        <span class="activity-username">${activity.username}</span>
+                        <span class="activity-description">has completed a <span class="activity-url">${activity.url}</span> ${activity.type} and earned <span class="activity-earnings">R$ ${activity.earnings}</span></span>
+                    </div>
+                `;
+                activitiesList.appendChild(activityElement);
+            });
+        });
+}
+
+fetchActivities();
+setInterval(fetchActivities, 5000);
+</script>
 
 </body>
 </html>

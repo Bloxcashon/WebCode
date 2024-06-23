@@ -45,7 +45,7 @@ $roblox_avatar_url = $userinfo['roblox_avatar_url'];
         <li><a href="#">Promocodes</a></li>
         <li><a href="#">Withdraw</a></li>
         <li><a href="#">Giveways</a></li>
-        <li><a href="#">Airdrop</a></li>
+        <li><a href="#">Rewards</a></li>
         <li><a href="#">Referrals</a></li>
         <li><a href="#">Tasks</a></li>
     </ul>
@@ -152,6 +152,31 @@ $roblox_avatar_url = $userinfo['roblox_avatar_url'];
 </div>
 </section>
 
+<footer>
+  <div class="footer-container">
+    <div class="footer-left-wrapper">
+    <div class="footer-left">
+      <img src="images/logo.png" alt="Logo" class="logo">
+      <p style="text-align: center;">&copy; 2024 Bloxcashon</p>
+      <p style="text-align: center;">All rights reserved</p>
+    </div>
+</div>
+    <div class="footer-right">
+      <div class="footer-links">
+        <a href="tos.html">Terms & Conditions</a>
+        <i class="ri-git-commit-fill"></i>
+        <a href="privacy.html">Privacy Policy</a>
+        <i class="ri-git-commit-fill"></i>
+        <a href="return.html">Return Policy</a>
+        <i class="ri-git-commit-fill"></i>
+        <a href="eula">EULA</a>
+      </div>
+      <p>Made with <i class="bx bx-heart" style="color: #fff;"></i> by Bloxcashon</p>
+      <p>We are not affiliated with Roblox or any of their trademarks</p>
+    </div>
+  </div>
+</footer>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
@@ -203,6 +228,7 @@ function fetchHighestPoints() {
 
 fetchHighestPoints();
 setInterval(fetchHighestPoints, 10000); 
+
 </script>
 </body>
 </html>

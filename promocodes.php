@@ -63,10 +63,10 @@ if (isset($_POST['promocode'])) {
 
         $sql = "INSERT INTO earned (unique_id, earnings, type, url, time, date) VALUES (?,?,?,?, NOW(), NOW())";
 $stmt = mysqli_prepare($conn, $sql);
-$uid_ref = &$uid;
-$points_ref = &$points;
-$type_ref = 'promocode';
-mysqli_stmt_bind_param($stmt, "sdss", $uid_ref, $points_ref, $type_ref, $code);
+$uid= &$uid;
+$points= &$points;
+$type= 'promocode';
+mysqli_stmt_bind_param($stmt, "sdss", $uid, $points, $type, $code);
 mysqli_stmt_execute($stmt);
 mysqli_stmt_close($stmt);
 
@@ -91,9 +91,9 @@ mysqli_stmt_close($stmt);
             mysqli_stmt_close($stmt);
 
             // Insert new record into the earned table for the referrer
-            $uid_ref = $uid;
-            $points_ref = $points;
-            $type_ref = 'promocode';
+            $uid_ref = $referrer_id;
+            $points_ref = $referral_earnings;
+            $type_ref = 'referral';
             $code_ref = $code;
             
             $sql = "INSERT INTO earned (unique_id, earnings, type, url, time, date) VALUES (?,?,?,?, NOW(), NOW())";
@@ -133,6 +133,7 @@ mysqli_stmt_close($stmt);
     <title>BLOXCASHON - Promocodes</title>
     <link rel="stylesheet" href="promocodes.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -146,7 +147,7 @@ mysqli_stmt_close($stmt);
         <li><a href="promocodes.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'promocodes.php')? 'active' : '';?>">Promocodes</a></li>
         <li><a href="#">Withdraw</a></li>
         <li><a href="#">Giveways</a></li>
-        <li><a href="#">Airdrop</a></li>
+        <li><a href="#">Rewards</a></li>
         <li><a href="#">Referrals</a></li>
         <li><a href="#">Tasks</a></li>
     </ul>
@@ -190,6 +191,31 @@ mysqli_stmt_close($stmt);
    </div>
 </section>
 
+<footer>
+  <div class="footer-container">
+    <div class="footer-left-wrapper">
+    <div class="footer-left">
+      <img src="images/logo.png" alt="Logo" class="logo">
+      <p style="text-align: center;">&copy; 2024 Bloxcashon</p>
+      <p style="text-align: center;">All rights reserved</p>
+    </div>
+</div>
+    <div class="footer-right">
+      <div class="footer-links">
+        <a href="tos.html">Terms & Conditions</a>
+        <i class="ri-git-commit-fill"></i>
+        <a href="privacy.html">Privacy Policy</a>
+        <i class="ri-git-commit-fill"></i>
+        <a href="return.html">Return Policy</a>
+        <i class="ri-git-commit-fill"></i>
+        <a href="eula">EULA</a>
+      </div>
+      <p>Made with <i class="bx bx-heart" style="color: #fff;"></i> by Bloxcashon</p>
+      <p>We are not affiliated with Roblox or any of their trademarks</p>
+    </div>
+  </div>
+</footer>
+
 <script>
    document.getElementById('redeem-button').addEventListener('click', function() {
        var promocode = document.getElementById('promocode-input').value;
@@ -201,35 +227,31 @@ mysqli_stmt_close($stmt);
            if (xhr.status === 200) {
                var response = xhr.responseText;
                if (response.includes('Promo code redeemed successfully')) {
-                   displaySuccessContainer(response);
+                   displaySuccessAlert(response);
                } else {
-                   displayErrorContainer(response);
+                   displayErrorAlert(response);
                }
            }
        };
    });
 
-   function displaySuccessContainer(message) {
-       var successContainer = document.createElement("div");
-       successContainer.className = "success-container";
-       successContainer.innerHTML = "<i class='ri-emotion-laugh-line'></i><p>" + message + "</p><button class='close-button'>Close</button>";
-       document.getElementById("promocode-container").appendChild(successContainer);
-
-       var closeButton = successContainer.querySelector('.close-button');
-       closeButton.addEventListener('click', function() {
-           successContainer.remove();
+   function displaySuccessAlert(message) {
+       Swal.fire({
+           icon: 'success',
+           title: 'Success!',
+           text: message,
+           confirmButtonText: 'Close',
+           confirmButtonColor: '#3085d6'
        });
    }
 
-   function displayErrorContainer(message) {
-       var errorContainer = document.createElement("div");
-       errorContainer.className = "error-container";
-       errorContainer.innerHTML = "<i class='ri-emotion-sad-fill'></i><p>" + message + "</p><button class='close-button'>Close</button>";
-       document.getElementById("promocode-container").appendChild(errorContainer);
-
-       var closeButton = errorContainer.querySelector('.close-button');
-       closeButton.addEventListener('click', function() {
-           errorContainer.remove();
+   function displayErrorAlert(message) {
+       Swal.fire({
+           icon: 'error',
+           title: 'Oops...',
+           text: message,
+           confirmButtonText: 'Close',
+           confirmButtonColor: '#d33'
        });
    }
 </script>

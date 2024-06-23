@@ -2,6 +2,25 @@
 require_once 'config.php';
 $conn = db_connect();
 
+if (isset($_SESSION['user_token'])) {
+    $sql = "SELECT * FROM users WHERE token ='{$_SESSION['user_token']}'";
+    $result = mysqli_query($conn, $sql);
+    
+    if (mysqli_num_rows($result) > 0) {
+        $userinfo = mysqli_fetch_assoc($result);
+        
+        // Check if the user already has a Roblox username associated with their email
+        if (!empty($userinfo['roblox_username'])) {
+            $existing_roblox_username = $userinfo['roblox_username'];
+        } else {
+            $existing_roblox_username = '';
+        }
+    } else {
+        header("Location: index.php");
+        die();
+    }
+}
+
 function generateUniqueId($length = 3, $maxLength = 17) {
     $idLength = rand($length, $maxLength);
     $possibleChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -258,14 +277,14 @@ if (isset($_GET['code'])) {
     <div class="container">
         <img src="<?= $userinfo['picture'] ?>" alt="" class="profile-picture" width="500" height="500">
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-            <div class="form">
-                <div class="input-group">
-                    <input type="text" id="form__input" name="form__input" class="form__input" required>
-                    <label for="form__input" class="form__label">Roblox Username</label>
-                </div>
-                <button class="button-29" role="button">Next</button>
-            </div>
-        </form>
+    <div class="form">
+        <div class="input-group">
+            <input type="text" id="form__input" name="form__input" class="form__input" value="<?php echo $existing_roblox_username; ?>" <?php if (!empty($existing_roblox_username)) { echo 'readonly'; } else { echo ''; } ?> required>
+            <label for="form__input" class="form__label">Roblox Username</label>
+        </div>
+        <button class="button-29" role="button">Next</button>
+    </div>
+</form>
         <a href="logout.php">Logout</a>
         <button class="back-button" onclick="location.href='index.php';">
             <i class="fa-solid fa-arrow-left"></i> Back

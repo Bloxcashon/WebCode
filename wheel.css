@@ -5,7 +5,10 @@
     font-family: 'Poetsen One' , sans-serif;
     list-style: none;
     text-decoration: none;
+    box-sizing: border-box;
+
 }
+
 header{
     position: fixed;
     right: 0;
@@ -18,64 +21,19 @@ header{
     padding: 33px 9%;
     background: transparent;
 }
-footer {
-    background-color: #f8002f;
-    
-background: #fe8c00;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #f83600, #fe8c00);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+#wheel {
+    width: 300px; /* Adjust width as needed */
+    height: 300px; /* Adjust height as needed */
+    border-radius: 50%;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+}
 
-
-
-        box-shadow: 0 1px 4px rgba(0,0,0,0.3),0 0 40px rgba(0,0,0,0.1) inset;
-    padding: 20px;
+.wheel-container{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-  }
-  
-  .footer-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .footer-left {
-    text-align: right;
-    color: white;
-
-  }
-  .footer-left-wrapper {
-    margin-right: 240px; /* add 40px margin to the right */
-  }
-
-  .footer-left img{
-    width: 100px;
-
-  }
-  
-  .footer-links {
-    margin-bottom: 10px;
-  }
-  
-  .footer-links a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .footer-links a:hover {
-    color: #ccc;
-  }
-  
-  .bx-heart {
-    font-size: 14px;
-  }
-  
-  .footer-right {
-    text-align: center;
-    color: lemonchiffon;
-  }
+    height: 100%;
+}
 
 .logo{
     font-size: 30px;
@@ -102,10 +60,6 @@ background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, F
     z-index: 10001;
     cursor: pointer;
     display: none;
-}
-html, body {
-    height: 100%;
-    margin: 0;
 }
 .nav{
     background-color: #f8002f;
@@ -159,41 +113,6 @@ background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, F
     box-shadow: #850202 0 3px 7px inset;
     transform: translateY(2px);
 }
-.user-entries{
-  font-family: 'Oswald', sans-serif;
-  color: white;
-  text-align: left;
-  align-items: left;
-  align-content: left;
-  text-transform: uppercase;
-}
-.giveaway-columns {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-
-.column {
-    flex: 1;
-    margin: 0 10px;
-}
-
-.column h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    font-family: 'Oswald', sans-serif;
-    color: #fff;
-}
-.entry-points {
-    font-weight: bold;
-    color: #4caf50; /* Green color */
-}
-
-#recent-entries-list {
-    list-style-type: none;
-    padding: 0;
-}
 .emethods {
     background-color: #f8002f;
 
@@ -204,7 +123,6 @@ background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, F
 
 
 width: 100%;
-min-height: 100vh;
 
 
 
@@ -215,6 +133,7 @@ min-height: 100vh;
     text-align: center;
     margin-top: 80px;
     box-shadow: #850202 0 3px 10px inset;
+    width: 100%;
 }
 .emethods-box h2{
     text-transform: uppercase;
@@ -301,10 +220,149 @@ background: linear-gradient(to bottom, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, 
     box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
     transform: translateY(-2px);
 }
+footer {
+    background-color: #f8002f;
+    
+background: #fe8c00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #f83600, #fe8c00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+        box-shadow: 0 1px 4px rgba(0,0,0,0.3),0 0 40px rgba(0,0,0,0.1) inset;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .footer-left {
+    text-align: right;
+    color: white;
+
+  }
+  .footer-left-wrapper {
+    margin-right: 240px; /* add 40px margin to the right */
+  }
+
+  .footer-left img{
+    width: 100px;
+
+  }
+  
+  .footer-links {
+    margin-bottom: 10px;
+  }
+  
+  .footer-links a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .footer-links a:hover {
+    color: #ccc;
+  }
+  
+  .bx-heart {
+    font-size: 14px;
+  }
+  
+  .footer-right {
+    text-align: center;
+    color: lemonchiffon;
+  }
+.rwrapper {
+    width: 38%;
+    max-width: 34.37em;
+    background:transparent;
+    padding: 0.5em;
+    border-radius: 1em;
+}
+
+.main > h1 {
+    text-align: center;
+    font-size: 15px;
+    text-shadow: 2px 2px rgb(200, 200, 200);
+}
+.main > h2{
+    text-align: center;
+    font-size: 10px;
+}
+
+.onecontainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#wheel {
+    max-height: inherit;
+    width: inherit;
+    top: 0;
+    padding: 0;
+}
+
+#spin-btn {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    height: 26%;
+    width: 26%;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 0;
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    color: #372685;
+    text-transform: uppercase;
+    font-size: 1.8em;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+.rimg {
+    position: absolute;
+    width: 4em;
+    top: 50%;
+    right: -8%;
+    transform: translateY(-50%);
+}
+
+#final-value {
+    font-size: 10px;
+    text-align: center;
+    margin-top: 10px;
+    color: #202020;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+
+    img {
+        right: -5%;
+    }
+}
+
 
 .button-29:active {
     box-shadow: #3c4fe0 0 3px 7px inset;
     transform: translateY(2px);
+}
+
+h2 {
+    margin: 10px 0;
+}
+
+p {
+    margin: 0;
+    font-size: 1em;
 }
 
 
@@ -364,94 +422,4 @@ background: linear-gradient(to bottom, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, 
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
-@import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
-/* Existing CSS styles */
-
-.giveaway-container {
-    padding: 20px;
-    color: #fff;
-    text-align: center;
-    background: transparent;
-    border: lemonchiffon;
-    border-radius: 2rem;
-    margin: 8 2rem;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    color: white;
-    transition: 0.4s ease-in-out;
-    box-shadow: #850202 0 3px 10px inset;
-}
-
-.giveaway-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.giveaway-col {
-    flex: 1;
-}
-
-.giveaway-col h2 {
-    font-size: 15px;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-}
-.giveaway-col h1{
-    font-size: 13px;
-}
-
-.giveaway-col p {
-    font-size: 20px;
-    font-weight: bold;
-    font-family: 'Oswald', sans-serif;
-}
-
-.separator {
-    width: 1px;
-    height: 30px;
-    background-color: #fff;
-    margin: 0 10px;
-}
-
-hr {
-    border: none;
-    border-top: 1px solid #fff;
-    margin: 10px 0;
-}
-
-.enter-btn {
-    background-color: #000000;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-    display: inline-flex;
-    align-items: center;
-    
-}
-
-.enter-btn i {
-    margin-right: 5px;
-}
-
-.enter-btn:focus {
-    box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
-}
-
-.enter-btn:hover {
-    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
-    transform: translateY(-2px);
-}
-
-.enter-btn:active {
-    box-shadow: #3c4fe0 0 3px 7px inset;
-    transform: translateY(2px);
-}
+@import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css')

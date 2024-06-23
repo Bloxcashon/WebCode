@@ -1,33 +1,45 @@
 <?php
 require_once 'config.php';
+require_once 'upgiveaway.php';
 $conn = db_connect();
 
-// Set appropriate headers for SSE
 header('Content-Type: text/event-stream');
 header('Cache-Control: no-cache');
 header('Connection: keep-alive');
 
 function sendWinnerNotification($winnerUniqueId, $giveawayId, $amount) {
     global $conn;
-
-    // Get the winner's Roblox username
-    $sql = "SELECT roblox_username FROM users WHERE unique_id = '$winnerUniqueId'";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
+    $sql = "SELECT roblox_username FROM users WHERE unique_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $winnerUniqueId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
     $winnerUsername = $row['roblox_username'];
 
-    // Send the winner notification
-    $message = "event: winner\ndata: {\"username\": \"$winnerUsername\", \"amount\": $amount}\n\n";
+    $message = "event: winner\n";
+    $message .= "data: " . json_encode(['username' => $winnerUsername, 'amount' => $amount]) . "\n\n";
     echo $message;
     flush();
 }
 
-// Keep the script running and listen for winner notifications
 while (true) {
-    // You can add some logic here to check for new winner notifications
-    // and call the sendWinnerNotification function when needed
-
-    // Example: Sleep for 5 seconds and then send a dummy notification
+    $currentGiveawayId = getGiveawayId($conn);
+    $sql = "SELECT * FROM gwinners WHERE giveaway_id = ? AND notified = 0 ORDER BY time DESC LIMIT 1";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $currentGiveawayId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($row = $result->fetch_assoc()) {
+        sendWinnerNotification($row['unique_id'], $row['giveaway_id'], $row['amount']);
+        
+        // Mark as notified
+        $updateSql = "UPDATE gwinners SET notified = 1 WHERE id = ?";
+        $updateStmt = $conn->prepare($updateSql);
+        $updateStmt->bind_param("i", $row['id']);
+        $updateStmt->execute();
+    }
+    
     sleep(5);
-    sendWinnerNotification('unique_id_123', 'GID#123', 2000);
 }

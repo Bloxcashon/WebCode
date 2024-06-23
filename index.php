@@ -2,9 +2,14 @@
 // Include the config.php file
 require_once 'config.php';
 
+// Initialize error message variable
+$error_message = '';
+
 // Check if the user is already logged in
-
-
+if (isset($_SESSION['user_token'])) {
+    header("Location: next.php");
+    exit();
+}
 
 $referral_id = null;
 
@@ -14,17 +19,11 @@ if (isset($_GET['ref'])) {
     $_SESSION['referral_id'] = $referral_id;
 }
 
+// Handle Google Sign-In
 if (isset($_GET['google-sign-in-nav']) || isset($_GET['google-sign-in-hero'])) {
     $authUrl = $client->createAuthUrl();
     header("Location: $authUrl");
     exit();
-} elseif (!isset($_GET['ref'])) {
-    // If there's no referral link, handle the sign-up buttons
-    if (isset($_GET['google-sign-in-nav']) || isset($_GET['google-sign-in-hero'])) {
-        $authUrl = $client->createAuthUrl();
-        header("Location: $authUrl");
-        exit();
-    }
 }
 ?>
 
@@ -36,6 +35,7 @@ if (isset($_GET['google-sign-in-nav']) || isset($_GET['google-sign-in-hero'])) {
     <title>BLOXCASHON</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,11 +55,41 @@ if (isset($_GET['google-sign-in-nav']) || isset($_GET['google-sign-in-hero'])) {
         <li><a href="https://www.tiktok.com/@bloxcashon" target="_blank">TikTok</a></li>
         <li><a href="https://www.facebook.com/bloxcashon" target="_blank">Facebook</a></li>
         <li><a class="nav-sign-up" id="google-sign-in-nav">Sign Up</a></li>
-        <li><a href="#">Login</a></li>
+        <li><a href="#" onclick="openLoginModal()">Login</a></li>
     </ul>
 
     <div class="bx bx-menu" id="menu-icon"></div>
 </header>
+<div id="loginModal" class="login-modal">
+    <div class="login-content">
+        <div class="login-left">
+            <h1>BLOXCASHON</h1>
+            <h2>The #1 FREE Rewards Website</h2>
+            <p class="bonus">🎁 New users get 2 R$</p>
+        </div>
+        <div class="login-right">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>SIGN IN</h2>
+            <form method="POST" action="">
+    <label for="username">USERNAME</label>
+    <input type="text" id="username" name="username" placeholder="Username" required>
+
+    <div class="h-captcha" data-sitekey="1de85670-0cdb-46e7-aa7d-659d4d9c4e06"></div>
+
+    <div class="terms-checkbox">
+        <input type="checkbox" id="terms-agree" required>
+        <label for="terms-agree">
+            I have read and agree to the 
+            <a href="privacy-policy" target="_blank" class="policy-link">Privacy Policy</a> and 
+            <a href="terms" class="policy-link" target="_blank">Terms of Service</a>
+        </label>
+    </div>
+
+    <button type="submit" name="login" class="enter-button">ENTER</button>
+</form>
+        </div>
+    </div>
+</div>
 <section class="hero">
     <div class="hero-text">
         <h5>#1 Robux Earning Platform</h5>
@@ -148,15 +178,13 @@ if (isset($_GET['google-sign-in-nav']) || isset($_GET['google-sign-in-hero'])) {
         <i class="ri-git-commit-fill"></i>
         <a href="return.html">Return Policy</a>
         <i class="ri-git-commit-fill"></i>
-        <a href="eula.html">EULA</a>
+        <a href="eula">EULA</a>
       </div>
       <p>Made with <i class="bx bx-heart" style="color: #fff;"></i> by Bloxcashon</p>
       <p>We are not affiliated with Roblox or any of their trademarks</p>
     </div>
   </div>
 </footer>
-
-
 
 <script src="https://unpkg.com/scrollreveal"></script>
 <script>
@@ -197,6 +225,74 @@ function eraseText() {
 }
 
 typeText();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var loginForm = document.querySelector('form');
+    var termsCheckbox = document.getElementById('terms-agree');
+
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        if (!termsCheckbox.checked) {
+            alert('Please agree to the Privacy Policy and Terms of Service before proceeding.');
+            return;
+        }
+
+        var hcaptchaResponse = hcaptcha.getResponse();
+        if (hcaptchaResponse.length == 0) {
+            alert('Please complete the captcha.');
+            return;
+        }
+
+        // If everything is valid, submit the form
+        var formData = new FormData(loginForm);
+        formData.append('login', '1');
+        formData.append('h-captcha-response', hcaptchaResponse);
+
+        fetch('login_handler.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(text => {
+            try {
+                return JSON.parse(text);
+            } catch (error) {
+                console.error('Server response:', text);
+                throw new Error('Invalid JSON response');
+            }
+        })
+        .then(data => {
+            if (data.success) {
+                window.location.reload();
+            } else {
+                alert(data.error || "An unknown error occurred");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("An error occurred. Please try again.");
+        });
+    });
+});
+
+function openLoginModal() {
+    var loginModal = document.getElementById('loginModal');
+    loginModal.style.display = 'flex';
+}
+
+function closeLoginModal() {
+    var loginModal = document.getElementById('loginModal');
+    loginModal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+    var loginModal = document.getElementById('loginModal');
+    if (event.target == loginModal) {
+        loginModal.style.display = 'none';
+    }
+}
 </script>
 </body>
 </html>

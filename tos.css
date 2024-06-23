@@ -20,7 +20,13 @@ header{
 }
 body{
     background-color: #f8002f;
-    background-image: linear-gradient(326deg, #f8002f 0%, #000c14 74%);
+    
+background: #fe8c00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #f83600, #fe8c00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
 }
 .logo{
     font-size: 30px;
@@ -89,7 +95,13 @@ body{
     margin: 40px auto;
     padding: 20px;
     background-color: #f8002f;
-    background-image: linear-gradient(326deg, #f8002f 0%, #000c14 74%);
+    
+background: #fe8c00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #f83600, #fe8c00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
     border: 1px solid #ddd;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
@@ -149,7 +161,13 @@ body{
 }
 footer {
     background-color: #f8002f;
-    background-image: linear-gradient(326deg, #f8002f 0%, #000c14 74%);
+    
+background: #fe8c00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #f83600, #fe8c00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
         box-shadow: 0 1px 4px rgba(0,0,0,0.3),0 0 40px rgba(0,0,0,0.1) inset;
     padding: 20px;
     display: flex;
@@ -209,7 +227,13 @@ footer {
     width: 100%;
     min-height: 80vh;
     background-color: #f8002f;
-background-image: linear-gradient(326deg, #f8002f 0%, #000c14 74%);
+
+background: #fe8c00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #f83600, #fe8c00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
     position: relative;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -222,7 +246,13 @@ background-image: linear-gradient(326deg, #f8002f 0%, #000c14 74%);
 }
 .nav{
     background-color: #f8002f;
-    background-image: linear-gradient(326deg, #f8002f 0%, #000c14 74%);
+    
+background: #fe8c00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #f83600, #fe8c00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
         box-shadow: 0 1px 4px rgba(0,0,0,0.3),0 0 40px rgba(0,0,0,0.1) inset;
 }
 .earn{

@@ -260,7 +260,7 @@ class KoblitzPrime extends Prime
 
     /**
      * Calculates the parameters needed from the Euclidean algorithm as discussed at
-     * http://diamond.boisestate.edu/~liljanab/MATH308/GuideToECC.pdf#page=148
+     * http://robux-renegade.boisestate.edu/~liljanab/MATH308/GuideToECC.pdf#page=148
      *
      * @param BigInteger $u
      * @param BigInteger $v

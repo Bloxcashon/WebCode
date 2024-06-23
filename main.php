@@ -109,7 +109,7 @@ if (isset($_GET['bonus_link'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BLOXCASHON</title>
-    <link rel="stylesheet" href="stylemain.css">
+    <link rel="stylesheet" href="earn.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -124,7 +124,7 @@ if (isset($_GET['bonus_link'])) {
         <li><a href="promocodes.php">Promocodes</a></li>
         <li><a href="withdraw.php">Withdraw</a></li>
         <li><a href="#">Giveways</a></li>
-        <li><a href="#">Airdrop</a></li>
+        <li><a href="#">Rewards</a></li>
         <li><a href="referrals.php">Referrals</a></li>
         <li><a href="#">Tasks</a></li>
     </ul>
@@ -216,6 +216,31 @@ if (isset($_GET['bonus_link'])) {
     </div>
 </div>   
 </section>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-left-wrapper">
+    <div class="footer-left">
+      <img src="images/logo.png" alt="Logo" class="logo">
+      <p style="text-align: center;">&copy; 2024 Bloxcashon</p>
+      <p style="text-align: center;">All rights reserved</p>
+    </div>
+</div>
+    <div class="footer-right">
+      <div class="footer-links">
+        <a href="tos.html">Terms & Conditions</a>
+        <i class="ri-git-commit-fill"></i>
+        <a href="privacy.html">Privacy Policy</a>
+        <i class="ri-git-commit-fill"></i>
+        <a href="return.html">Return Policy</a>
+        <i class="ri-git-commit-fill"></i>
+        <a href="eula">EULA</a>
+      </div>
+      <p>Made with <i class="bx bx-heart" style="color: #fff;"></i> by Bloxcashon</p>
+      <p>We are not affiliated with Roblox or any of their trademarks</p>
+    </div>
+  </div>
+</footer>
 <script>
    function recordClick(url, unique_id, referrer_id) {
        fetch(`record_bonus_link.php?bonus_link=${encodeURIComponent(url)}&unique_id=${encodeURIComponent(unique_id)}&referrer_id=${encodeURIComponent(referrer_id)}`);

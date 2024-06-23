@@ -1,0 +1,190 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poetsen One' , sans-serif;
+    list-style: none;
+    text-decoration: none;
+}
+header{
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 33px 9%;
+    background: transparent;
+}
+body{
+    background-color: #f8002f;
+    
+background: #fe8c00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #f83600, #fe8c00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+}
+.logo{
+    font-size: 30px;
+    font-weight: 700;
+    color: white;
+}
+  .tos {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f8002f;
+    
+background: #fe8c00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #f83600, #fe8c00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tos h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: white;
+  }
+  
+  .tos h2 {
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: lemonchiffon;
+  }
+  
+  .tos p {
+    margin-bottom: 20px;
+    color: white;
+  }
+  
+  .tos a {
+    text-decoration: none;
+    color: #337ab7;
+  }
+  
+  .tos a:hover {
+    color: #23527c;
+  }
+
+#menu-icon{
+    color: aqua;
+    font-size: 35px;
+    z-index: 10001;
+    cursor: pointer;
+    display: none;
+}
+footer {
+    background-color: #f8002f;
+    
+background: #fe8c00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #f83600, #fe8c00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+        box-shadow: 0 1px 4px rgba(0,0,0,0.3),0 0 40px rgba(0,0,0,0.1) inset;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .footer-left {
+    text-align: right;
+    color: white;
+
+  }
+  .footer-left-wrapper {
+    margin-right: 240px; /* add 40px margin to the right */
+  }
+
+  .footer-left img{
+    width: 100px;
+
+  }
+  
+  .footer-links {
+    margin-bottom: 10px;
+  }
+  
+  .footer-links a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .footer-links a:hover {
+    color: #ccc;
+  }
+  
+  .bx-heart {
+    font-size: 14px;
+  }
+  
+  .footer-right {
+    text-align: center;
+    color: lemonchiffon;
+  }
+.nav{
+    background-color: #f8002f;
+    
+background: #fe8c00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #f83600, #fe8c00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+        box-shadow: 0 1px 4px rgba(0,0,0,0.3),0 0 40px rgba(0,0,0,0.1) inset;
+}
+
+@media (max-width: 1535px){
+    header{
+        padding: 15px 3%;
+        transition: .2s;
+    }
+}
+@media (max-width: 1460px){
+    section{
+        padding: 0 12%;
+        transition: .2s;
+    }
+}
+@media (max-width: 1195px){
+    section{
+        padding: 0 3%;
+        transition: .2s;
+    }
+}
+@media (max-width: 990px){
+    #menu-icon{
+        display: block;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .footer-container {
+      flex-direction: column; /* switch to column layout */
+      align-items: center; /* center align the columns */
+    }
+    .footer-left-wrapper {
+      margin-right: 0; /* remove margin on smaller screens */
+    }
+    .footer-left {
+      margin-bottom: 20px; /* add some space between the logo and the text */
+    }
+  }

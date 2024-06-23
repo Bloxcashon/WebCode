@@ -31,6 +31,12 @@ function db_connect() {
     $conn = mysqli_connect($hostname, $username, $password, $database);
     return $conn;
 }
+function logError($message) {
+    $logFile = 'winnererror.log';
+    $timestamp = date('Y-m-d H:i:s');
+    $logMessage = "[$timestamp] $message" . PHP_EOL;
+    file_put_contents($logFile, $logMessage, FILE_APPEND);
+}
 
 
 ?>

@@ -32,7 +32,7 @@ class GradeHistory extends \Google\Model
    */
   public $gradeTimestamp;
   public $maxPoints;
-  public $pointsEarned;
+  public $pointsearned;
 
   /**
    * @param string
@@ -84,13 +84,13 @@ class GradeHistory extends \Google\Model
   {
     return $this->maxPoints;
   }
-  public function setPointsEarned($pointsEarned)
+  public function setPointsearned($pointsearned)
   {
-    $this->pointsEarned = $pointsEarned;
+    $this->pointsearned = $pointsearned;
   }
-  public function getPointsEarned()
+  public function getPointsearned()
   {
-    return $this->pointsEarned;
+    return $this->pointsearned;
   }
 }
 

@@ -147,3 +147,66 @@ body {
     box-shadow: #850202 0 3px 7px inset;
     transform: translateY(2px);
 }
+footer {
+    background-color: #f8002f;
+    
+background: #fe8c00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #f83600, #fe8c00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+        box-shadow: 0 1px 4px rgba(0,0,0,0.3),0 0 40px rgba(0,0,0,0.1) inset;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .footer-left {
+    text-align: right;
+    color: white;
+
+  }
+  .footer-left-wrapper {
+    margin-right: 240px; /* add 40px margin to the right */
+  }
+
+  .footer-left img{
+    width: 100px;
+
+  }
+  
+  .footer-links {
+    margin-bottom: 10px;
+  }
+  
+  .footer-links a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .footer-links a:hover {
+    color: #ccc;
+  }
+  
+  .bx-dot {
+    font-size: 18px;
+    margin: 0 10px;
+  }
+  
+  .bx-heart {
+    font-size: 14px;
+  }
+  
+  .footer-right {
+    text-align: center;
+    color: lemonchiffon;
+  }

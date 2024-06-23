@@ -9,7 +9,7 @@ require_once 'config.php';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BLOXCASHON - Terms of Service</title>
-    <link rel="stylesheet" href="tos.css">
+    <link rel="stylesheet" href="eula.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
