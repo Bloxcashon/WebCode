@@ -62,6 +62,7 @@ if (isset($_POST['amount'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BLOXCASHON</title>
     <link rel="stylesheet" href="withdraw1.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -138,6 +139,29 @@ if (isset($_POST['amount'])) {
         </div>
     </div>
 </section>
+<div id="loading-overlay" style="display: none;">
+  <div class="loading-content">
+    <div class="body">
+      <span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+      <div class="base">
+        <span></span>
+        <div class="face"></div>
+      </div>
+    </div>
+    <div class="longfazers">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <h1>SENDING YOU THE R$</h1>
+  </div>
+</div>
 <footer>
   <div class="footer-container">
     <div class="footer-left-wrapper">
@@ -222,48 +246,80 @@ if (isset($_POST['amount'])) {
       <ol>
         <li>Click <a href="https://create.roblox.com/dashboard/creations/experiences/${gameId}/monetization/passes" target="_blank">this link</a> to create a gamepass for your selected game.</li>
         <li>Set the price of the gamepass to ${price}. </li>
-        <li>After creating the gamepass, click the button below to complete your withdrawal.</li>
+        <li>After creating the gamepass, click the button below to check for your gamepass.</li>
       </ol>
       <button id="check-gamepass-btn">Check Gamepass</button>
-      <button id="confirm-withdrawal-btn">Confirm Withdrawal</button>
+      <div id="gamepass-details"></div>
     `;
 
     const checkGamepassBtn = document.getElementById('check-gamepass-btn');
-    const confirmWithdrawalBtn = document.getElementById('confirm-withdrawal-btn');
 
     checkGamepassBtn.addEventListener('click', () => {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', `proxy.php?url=https://games.roblox.com/v1/games/${gameId}/game-passes?limit=10&sortOrder=1`, true);
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `proxy.php?url=https://games.roblox.com/v1/games/${gameId}/game-passes?limit=10&sortOrder=1`, true);
 
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            const gamepasses = JSON.parse(xhr.responseText);
-            let gamepassId;
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                const gamepasses = JSON.parse(xhr.responseText);
+                let gamepassFound = false;
+                let gamepassId;
 
-            for (const gamepass of gamepasses.data) {
-                if (gamepass.price === price) {
-                    gamepassId = gamepass.id;
-                    break;
+                for (const gamepass of gamepasses.data) {
+                    if (gamepass.price === price) {
+                        gamepassFound = true;
+                        gamepassId = gamepass.id;
+                        break;
+                    }
+                }
+
+                if (gamepassFound) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Matching gamepass found!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+
+                    const gamepassDetails = document.getElementById('gamepass-details');
+                    gamepassDetails.innerHTML = `
+                        <div class="gamepass-card">
+                            <h4>Gamepass Details</h4>
+                            <p>ID: ${gamepassId}</p>
+                            <p>Price: ${price}</p>
+                            <button id="confirm-withdrawal-btn">Confirm Withdrawal</button>
+                        </div>
+                    `;
+
+                    const confirmWithdrawalBtn = document.getElementById('confirm-withdrawal-btn');
+                    confirmWithdrawalBtn.addEventListener('click', () => {
+                        const xhrInsert = new XMLHttpRequest();
+                        xhrInsert.open('POST', 'insert_wstatus.php', true);
+                        xhrInsert.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                        const data = `unique_id=${uniqueId}&user_id=${userId}&game_id=${gameId}&gmp_id=${gamepassId}&amount=${price}&status=pending`;
+                        xhrInsert.send(data);
+
+                        Swal.fire({
+                            title: 'Withdrawal Confirmed',
+                            text: 'Your withdrawal request has been submitted.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'No gamepass with specified details was found.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
                 }
             }
+        };
 
-            if (gamepassId) {
-                console.log(`Gamepass ID: ${gamepassId}`);
-                // Store the gamepass ID for future use
-                const xhrInsert = new XMLHttpRequest();
-                xhrInsert.open('POST', 'insert_wstatus.php', true);
-                xhrInsert.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send();
+    });
 
-                const data = `unique_id=${uniqueId}&user_id=${userId}&game_id=${gameId}&gmp_id=${gamepassId}&amount=${price}&status=pending`;
-                xhrInsert.send(data);
-            } else {
-                alert('Gamepass not found');
-            }
-        }
-    };
-
-    xhr.send();
-});
     confirmWithdrawalBtn.addEventListener('click', () => {
   const gamepassId = document.getElementById('gamepass-id').value;
   const xhr = new XMLHttpRequest();

@@ -275,7 +275,7 @@ if (isset($_GET['code'])) {
         </div>
     </header>
     <div class="container">
-        <img src="<?= $userinfo['picture'] ?>" alt="" class="profile-picture" width="500" height="500">
+    <img src="<?php echo htmlspecialchars($userinfo['picture']); ?>" alt="" class="profile-picture" width="500" height="500">
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <div class="form">
         <div class="input-group">
@@ -285,10 +285,7 @@ if (isset($_GET['code'])) {
         <button class="button-29" role="button">Next</button>
     </div>
 </form>
-        <a href="logout.php">Logout</a>
-        <button class="back-button" onclick="location.href='index.php';">
-            <i class="fa-solid fa-arrow-left"></i> Back
-        </button>
+        <a class="button-28" href="logout.php">Logout</a>
     </div>
 </body>
 </html>

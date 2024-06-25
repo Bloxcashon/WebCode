@@ -120,13 +120,12 @@ if (isset($_GET['bonus_link'])) {
 <header class="nav">
     <a href="#" class="logo">BLOXCASHON</a>
     <ul class="navlist">
-        <li><a href="main.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'main.php')? 'active' : '';?>">Earn</a></li>
-        <li><a href="promocodes.php">Promocodes</a></li>
-        <li><a href="withdraw.php">Withdraw</a></li>
-        <li><a href="#">Giveways</a></li>
-        <li><a href="#">Rewards</a></li>
-        <li><a href="referrals.php">Referrals</a></li>
-        <li><a href="#">Tasks</a></li>
+        <li><a href="main" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'main.php')? 'active' : '';?>">Earn</a></li>
+        <li><a href="promocodes">Promocodes</a></li>
+        <li><a href="withdraw">Withdraw</a></li>
+        <li><a href="giveaway">Giveways</a></li>
+        <li><a href="rewards">Rewards</a></li>
+        <li><a href="referrals">Referrals</a></li>
     </ul>
 
     <div class="bx bx-menu" id="menu-icon"></div>
